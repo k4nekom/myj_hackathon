@@ -10,6 +10,7 @@ vagrant up
 ```
 
 仮想マシンに入る  
+__windowsの人はターミナルを管理者権限で起動する__
 ```
 vagrant ssh  
 ```
