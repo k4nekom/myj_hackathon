@@ -1,16 +1,19 @@
 # 環境構築手順
 
+__windowsの人はターミナル(gitbash等)を管理者権限で起動する__
+
 リポジトリをクローン
 ```
 git clone git@github.com:masaki987654321/myj_hackathon.git
 ```
-仮想マシンを起動  
+
+vagrantfileのあるディレクトリに移動し、仮想マシンを起動  
 ```
+cd myj_hackathon
 vagrant up  
 ```
 
 仮想マシンに入る  
-__windowsの人はターミナルを管理者権限で起動する__
 ```
 vagrant ssh  
 ```
@@ -34,3 +37,16 @@ python manage.py runserver 0.0.0.0:8000
 ```
 
 [localhost:8000](localhost:8000)へアクセスできれば完了 
+
+### 終了するとき
+ctrl + c でdjangoサーバーを停止
+
+仮想マシンからログアウト
+```
+exit
+```
+
+仮想マシンを停止
+```
+vagrant halt
+```
