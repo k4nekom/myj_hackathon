@@ -1,3 +1,5 @@
+{% extends "base/app.html" %}
+{% block contents %}
 <div class="center-block container col-8 offset-2">
     <h2>新規投稿</h2>
     <form id="signupform" action="{% url 'posts:new' %}" method="POST" enctype="multipart/form-data">
@@ -29,6 +31,7 @@
 </div>
 
 
+{% endblock contents %}
 
 
 

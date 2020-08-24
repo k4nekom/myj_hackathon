@@ -1,3 +1,5 @@
+{% extends "base/app.html" %}
+{% block contents %}
 <section>
     <!-- もし投稿があれば一覧を表示する -->
     {% if post_list %}
@@ -20,11 +22,6 @@
                      <div class="card-hedder">
                         コメントする
                     </div>
-                    <div class="pt-2">
-                        <small>
-                            投稿時間{{ post.created_at|date:'Y-m-d H:i' }}
-                        </small>
-                    </div>
                 </div>
             </div>
         </div>
@@ -41,3 +38,4 @@
         </div>
         {% endif %}
 </section>
+{% endblock contents %}
