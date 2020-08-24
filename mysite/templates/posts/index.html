@@ -1,5 +1,6 @@
 {% extends "base/app.html" %}
 {% block contents %}
+<!-- timeline section-->
 <section>
     <!-- もし投稿があれば一覧を表示する -->
     {% if post_list %}
@@ -8,11 +9,6 @@
         <div class="col-10 offset-1">
             <div class="card">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="{% url 'accounts:userDetail' post.author%}" class="text-dark"><img
-                                src="{{ post.author.icon.url }}" class="timeline-icon" style="height:3%">
-                            {{post.author.username }}
-                        </a>
-                    </li>
                 </ul>
                 <img src="{{post.picture.url}}" class="card-img" />
                 <div class="card-body">
@@ -21,6 +17,11 @@
                     </div>
                      <div class="card-hedder">
                         コメントする
+                    </div>
+                    <div class="pt-2">
+                        <small>
+                            投稿時間{{ post.created_at|date:'Y-m-d H:i' }}
+                        </small>
                     </div>
                 </div>
             </div>
@@ -38,4 +39,7 @@
         </div>
         {% endif %}
 </section>
+<!-- ここにJSスクリプトを書いていく -->
+<script>
+</script>
 {% endblock contents %}

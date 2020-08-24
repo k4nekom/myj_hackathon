@@ -20,4 +20,4 @@ class Index(ListView):
     model = Post
     template_name = 'posts/index.html'
     #paginate_by = 20
-    queryset = Post.objects.order_by('id').reverse
+    queryset = Post.objects.order_by('created_at').reverse()
