@@ -10,7 +10,7 @@ class SignUpView(generic.CreateView):
     # 使うformクラス設定
     form_class = SignUpForm
     # 使うテンプレートファイル設定
-    template_name = 'login/signup.html'
+    template_name = 'registration/signup.html'
     # 成功時にログイン処理を行ってAccountDetailViewに飛ぶ
     def get_success_url(self):
         form = self.get_form()
@@ -27,3 +27,7 @@ class AccountDetailView(DetailView):
     # urlのパスクエリを引数に取る(後述)
     slug_field = 'username'
     slug_url_kwarg = 'username'
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data()
+        context['login_user'] = self.request.user
+        return context
