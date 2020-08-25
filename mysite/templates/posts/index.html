@@ -13,7 +13,7 @@
             <div class="card">
                 <ul class="list-group list-group-flush">
                 </ul>
-               
+                <img src="{{post.picture.url}}" class="card-img" />
                 <div class="card-body">
                     <div class="like_list_{{post.id}}">
                         <!-- ここにお気に入り機能を実装していく -->
@@ -25,9 +25,11 @@
                         {{ comment_list|get_comment_list:post.id }}
                     </div>
                     <div class="card-hedder">
-                        
-                        <div><span class="mr-2">@{{ post.author.username }}</span>{{ post.text }}</div>
-                       
+
+                        <div><span class="mr-2"><a class="nav-link"
+                                    href="/accounts/{{ post.author.username }}">@{{ post.author.username }}</a></span>{{ post.text }}
+                        </div>
+
                     </div>
                     <div class="pt-2">
                         <small>
@@ -76,15 +78,15 @@
             $(this).find(":text").val("")
             return false
         });
-        // 新規追加ここまで
+    // 新規追加ここまで
     function do_like(post_id) {
         $.ajax({
-                url: `./${post_id}/like`,
-                type: 'get'
-            })
+            url: `./${post_id}/like`,
+            type: 'get'
+        })
             .done((data) => {
                 console.log(data)
-             
+
                 $('.like_list_' + post_id).html(data);
             })
     }
@@ -92,10 +94,10 @@
     function do_comment(form) {
         console.log(form.serialize())
         $.ajax({
-                url: `./${form.attr("id")}/comment/`,
-                type: 'post',
-                data: form.serialize(),
-            })
+            url: `./${form.attr("id")}/comment/`,
+            type: 'post',
+            data: form.serialize(),
+        })
             .done((data) => {
                 $('.like_list_' + form.attr("id")).html(data);
             })

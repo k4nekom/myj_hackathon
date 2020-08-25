@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,17 +8,20 @@
     <title>mysite</title>
     {% load static %}
     <!-- 必要なライブラリインポート -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
+        integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script> 
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-light bg-light box-shadow  scrolling-navbar">
@@ -32,11 +36,13 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">ログイン</a></li>
                 {% else %}
                 <!-- ログインしていたらこっち -->
-                <li class="nav-item"><a class="nav-link" href="{% url 'posts:index' %}">ディスカバリー</a></li> <!--ここを編集-->
-                <li class="nav-item"><a class="nav-link" href="{% url 'posts:new' %}">投稿</a></li> <!--ここを編集-->
+                <li class="nav-item"><a class="nav-link" href="{% url 'posts:index' %}">ディスカバリー</a></li>
+                <li class="nav-item"><a class="nav-link" href="/accounts/{{ user.username }}">私</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'posts:new' %}">投稿</a></li>
+                <!--ここを編集-->
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">ログアウト</a></li>
                 {% endif %}
-                 <!-- 追加ここまで -->
+                <!-- 追加ここまで -->
             </ul>
         </nav>
     </header>
@@ -44,4 +50,5 @@
         {% block contents %}{% endblock %}
     </main>
 </body>
+
 </html>
