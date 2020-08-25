@@ -11,6 +11,8 @@ def get_likes(like_list, key):
             text += f"{like.author.username}, "
             text += "がいいねしました"
     return text
+
+
 @register.filter(name='is_like')
 def is_like(post, user):
     if Like.objects.filter(author=user, post=post).exists():
@@ -24,5 +26,6 @@ def get_comment_list(comment_list, key):
     text = ""
     if key in comment_list:
         for comment in comment_list[key]:
-            text += f"@{comment.author.username}: {comment.text}<br>"
+            text += f"<a href='/accounts/" + comment.author.username + \
+                f"'>@{comment.author.username}</a>: {comment.text}<br>"
     return mark_safe(text)
