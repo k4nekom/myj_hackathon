@@ -14,7 +14,7 @@
                 <ul class="list-group list-group-flush">
                 </ul>
                 {% if post.picture %}
-                    <img src="{{post.picture.url}}" class="card-img" />
+                <img src="{{post.picture.url}}" class="card-img" />
                 {% endif %}
                 <div class="card-body">
                     <div class="like_list_{{post.id}}">
@@ -24,7 +24,9 @@
                         {{ like_list|get_likes:post.id }}
 
                         <br>
+
                         {{ comment_list|get_comment_list:post.id }}
+
                     </div>
                     <div class="card-hedder">
 
@@ -36,7 +38,7 @@
                     <div class="pt-2">
                         <small>
                             {{ post.text}}
-                            {% comment %} todo画像挿入 {% endcomment %}
+                            <!-- {% comment %} todo画像挿入 {% endcomment %} -->
                             投稿時間{{ post.created_at|date:'Y-m-d H:i' }}
                         </small>
                     </div>
