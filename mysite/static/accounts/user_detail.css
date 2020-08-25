@@ -1,0 +1,36 @@
+
+.user_icon_img{
+    display: block;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;  
+    margin: 10px auto 30px;
+    position: relative;
+    background-size: cover;
+}
+
+
+
+
+.detail_user_profile{
+    color: gray;
+}
+
+.detail_user_profile::before{
+    content: "♦︎";
+    color: #1b9aaa;
+    padding-right: 6px;
+
+}
+
+body{
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.detail_user_name{
+    font-weight: bold;
+    border-bottom: 1px solid #000;
+}
+

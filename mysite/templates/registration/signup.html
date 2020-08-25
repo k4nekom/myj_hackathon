@@ -6,7 +6,7 @@
             登録フォーム
         </div>
         <div class="card-body">
-            <form action="{% url 'accounts:signup' %}" method="post" enctype="multipart/form-data">
+            <form name='signup' action="{% url 'accounts:signup' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 {{ form.non_field_errors }}
@@ -39,7 +39,7 @@
                     {{ form.message }}
                     {{ form.message.errors }}
                 </div>
-                <div class="form-group">
+                <div name="twitter_url" class="form-group">
                     {{ form.twitter_url.label_tag }}
                     {{ form.twitter_url }}
                     {{ form.twitter_url.errors }}
@@ -47,10 +47,24 @@
             
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">登録</button>
+                    <input type="button" value="送信" class="btn btn-primary" onClick="check_submit()">
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    function check_submit() {
+        console.log(document.signup.twitter_url.value)
+        if (document.signup.twitter_url.value.includes('https://twitter.com/')) {
+            document.signup.submit();
+        } else {
+            alert('twitterのurlが間違っています')
+            
+        }
+    }
+</script>
+
 {% endblock contents %}
+
