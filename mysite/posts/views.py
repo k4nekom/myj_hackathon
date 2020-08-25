@@ -31,14 +31,22 @@ class Index(ListView):
         context = super().get_context_data()
         like_list = {}
         comment_list = {}
+        comment_list2 = {}
+        login_user = self.request.user
         # すでに取得されている投稿リストを一件づつ取り出す
         for post in context['post_list']:
             # 取り出したものから「いいね!」を探してlike_listに格納する
             like_list[post.id] = Like.objects.filter(post=post)
             comment_list[post.id] = Comment.objects.filter(post=post)
+        for post in context['post_list']:
+            comments = []
+            for comment in comment_list[post.id]:
+                if post.id == login_user.id or comment.author.id == login_user.id:
+                    comments.append(comment)
+            comment_list2.update({post.id: comments})
         context['like_list'] = like_list
-        context['comment_list'] = comment_list
-        context['login_user'] = self.request.user
+        context['login_user'] = login_user
+        context['comment_list'] = comment_list2
         return context
 
 

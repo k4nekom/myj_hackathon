@@ -25,9 +25,7 @@
 
                         <br>
 
-                        {% if post.author.id == login_user.id %}
                         {{ comment_list|get_comment_list:post.id }}
-                        {% endif %}
 
                     </div>
                     <div class="card-hedder">
