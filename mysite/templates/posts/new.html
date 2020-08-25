@@ -6,8 +6,7 @@
         {% csrf_token %}
         <div class="form-group">
             <div class="custom-file">
-                <input type="file" class="custom-file-input " name="picture" id="picture">
-                <label class="custom-file-label" for="customFile">Choose file</label>
+                {{form.picture}}
             </div>
             {% if form.picture.errors %}
             <div class="alert alert-danger">
@@ -32,6 +31,3 @@
 
 
 {% endblock contents %}
-
-
-
