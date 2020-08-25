@@ -15,45 +15,47 @@
                 <ul class="list-group list-group-flush">
                 </ul>
                 <div class ="usernameicon">
-                    <img src=" {{user.icon.url}}" class="iconcss">
+                    {% if user.icon %}
+                        <img src=" {{user.icon.url}}" class="iconcss">
+                    {% endif %}
                     <span class="mr-2">
                         <a class="nav-link" href="/accounts/{{ post.author.username }}">　{{ post.author.username }}</a>
                     </span>
                 </div>
-                {% if post.picture %}
-                <img src="{{post.picture.url}}" class="card-img" />
-                {% endif %}
                 <div class="card-body">
                     <div class="card-hedder">
                         <div class="box_left bigsize">
                             {{ post.text }}
                         </div>
-
+                        {% if post.picture %}
+                            <img src="{{post.picture.url}}" class="card-img" />
+                        {% endif %}
+                        <div class="pt-2">
+                            <small>
+                                {{ post.created_at|date:'Y-m-d H:i' }}
+                            </small>
+                        </div>
                         <div class="like_list_{{post.id}} box_left">
                             <!-- ここにお気に入り機能を実装していく -->
-    
                             {{ post|is_like:user }}
                             {{ like_list|get_likes:post.id }}
-    
                             <br>
                             {{ comment_list|get_comment_list:post.id }}
                         </div>
-
-                    </div>
-                    <div class="pt-2">
-                        <small>
-                            {{ post.created_at|date:'Y-m-d H:i' }}
-                        </small>
                     </div>
                 </div>
-
-                <div class="card-footer">
-                    コメントを送る
-                    <form class="comment" id="{{post.id}}">
-                        {% csrf_token %}
-                        <input class="form-control col-12" name="comment" type="text" class="comment">
-                    </form>
-                </div>
+                {% if user.id != post.author.id %}
+                    <div class="card-footer">
+                        <details>
+                            <summary>コメントする</summary>
+                            <form class="comment" id="{{post.id}}">
+                                {% csrf_token %}
+                                <textarea class="form-control col-12" name="comment" cols="50" rows="10"></textarea>
+                                <input type="submit" value="送信" class="comment" name='comment'>
+                            </form>
+                        </details>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -79,9 +81,9 @@
             do_like(id)
         }) // このセミコロンを削除
         // ここから新規追加
-        .on('submit', 'form', function () {
+        .on('click', 'form', function () {
             do_comment($(this))
-            $(this).find("text").val("")
+            $(this).find("textarea").val("")
             return false
         });
     // 新規追加ここまで
@@ -109,5 +111,7 @@
             })
     }
     // 新規追加ここまで
+
+
 </script>
 {% endblock contents %}

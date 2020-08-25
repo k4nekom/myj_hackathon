@@ -26,7 +26,7 @@ def get_comment_list(comment_list, key):
     text = ""
     if key in comment_list:
         for comment in comment_list[key]:
-            text += f"<a href='/accounts/" + comment.author.username + \
-                f"'>@{comment.author.username}</a>: {comment.text}<br>フォローしませんか？<br><a href='" + comment.author.twitter_url + \
+            text += f"<hr><a href='/accounts/" + comment.author.username + \
+                f"'>@{comment.author.username}</a><br>{comment.text}<br><br>フォローしませんか？<br><a href='" + comment.author.twitter_url + \
                 f"'>{comment.author.twitter_url}</a><br>"
     return mark_safe(text)
