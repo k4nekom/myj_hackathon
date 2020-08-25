@@ -5,6 +5,7 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth import login
 from .forms import SignUpForm
 from .models import User
+from django.views.generic.edit import UpdateView
 # サインアップ画面
 class SignUpView(generic.CreateView):
     # 使うformクラス設定
@@ -32,3 +33,16 @@ class AccountDetailView(DetailView):
         context = super().get_context_data()
         context['login_user'] = self.request.user
         return context
+
+class IconEdit(UpdateView):
+    model = User
+    template_name = 'accounts/icon_edit.html'
+    fields = ['icon','message','twitter_url']
+    def get_object(self):
+        # ログイン中のユーザーで検索することを明示する
+        return self.request.user
+    def get_success_url(self):
+        form = self.get_form()
+        return reverse(
+            'accounts:userdetail',
+            kwargs={'username': self.request.user.username})

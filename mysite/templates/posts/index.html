@@ -13,7 +13,9 @@
             <div class="card">
                 <ul class="list-group list-group-flush">
                 </ul>
-                <img src="{{post.picture.url}}" class="card-img" />
+                {% if post.picture %}
+                    <img src="{{post.picture.url}}" class="card-img" />
+                {% endif %}
                 <div class="card-body">
                     <div class="like_list_{{post.id}}">
                         <!-- ここにお気に入り機能を実装していく -->
