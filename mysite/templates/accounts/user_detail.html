@@ -12,9 +12,12 @@
             {{user.message}}
             {% if user.id == login_user.id %}
                 {{user.twitter_url}}         
+                <a href="{% url 'accounts:icon_edit' %}">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-cog"></i> アイコン編集する
+                    </button>
+                </a>
             {% endif %}
-
-
         </div>
     </div>
     <img src=" {{user.icon.url}}">
