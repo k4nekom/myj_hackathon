@@ -15,6 +15,7 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     
     <link rel="stylesheet" href="{% static 'base/app.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'posts/index.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'accounts/user_detail.css' %}" type="text/css" />
     
 
@@ -38,15 +39,15 @@
                 <!-- ここから追加 -->
                 {% if user.id is None %}
                 <!-- ログインしていなかったらこっち -->
-                <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}">新規登録</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">ログイン</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}">新規登録　</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">ログイン　</a></li>
                 {% else %}
                 <!-- ログインしていたらこっち -->
-                <li class="nav-item"><a class="nav-link" href="{% url 'posts:index' %}">ディスカバリー</a></li>
-                <li class="nav-item"><a class="nav-link" href="/accounts/{{ user.username }}">私</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'posts:new' %}">投稿</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'posts:index' %}">ディスカバリー　</a></li>
+                <li class="nav-item"><a class="nav-link" href="/accounts/{{ user.username }}">マイページ　</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'posts:new' %}">投稿　</a></li>
                 <!--ここを編集-->
-                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">ログアウト</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">ログアウト　</a></li>
                 {% endif %}
                 <!-- 追加ここまで -->
             </ul>
