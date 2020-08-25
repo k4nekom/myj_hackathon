@@ -1,0 +1,30 @@
+#icon_edit{
+  background: #fff;
+}
+#icon_edit_h1{
+  font-size: 1.5em;
+  color: #1B9AAA;
+  text-align: center;
+  margin: 40px 0 20px;
+}
+#icon_edit_form{
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  background: #fff;
+  padding: 40px 0;
+}
+#icon_edit_dl{
+  margin: 0 auto;
+  width: 600px;
+}
+.field{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+#icon_edit_dt{width: 200px;}
+#icon_edit_dd{widows: 400px;}
+#id_twitter_url{
+  width: 300px;
+}

@@ -1,25 +1,53 @@
 {% extends 'base/app.html' %}
 {% block contents %}
+<div id="icon_edit"></div>
 <div class="container">
     <div class=" card card-primary">
-        <div class="card-heading">
-            登録フォーム
-        </div>
-        <div class="card-body">
-            <form action="{% url 'accounts:icon_edit' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% for field in form %}
-                <div class="form-group">
-                    <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-                    {{ field }}
-                    {{ field.errors }}
-                </div>
-                {% endfor %}
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">更新</button>
-                </div>
-            </form>
-        </div>
+        <dl id="icon_edit_dl">
+            <h1 class="card-heading" id="icon_edit_h1">
+                登録フォーム
+            </h1>
+            <div class="card-body">
+                <form action="{% url 'accounts:icon_edit' %}" method="post" enctype="multipart/form-data"
+                    id="icon_edit_form">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <div class="field">
+                        <dt id="icon_edit_dt">
+                            {{ form.icon.label_tag }}
+                        </dt>
+                        <dd id="icon_edit_dd">
+                            {{ form.icon }}
+                            <span class="helptext">{{ form.name.help_text }}</span>
+                            {{ form.icon.errors }}
+                        </dd>
+                    </div>
+                    <div class="field">
+                        <dt id="icon_edit_dt">
+                            {{ form.message.label_tag }}
+                        </dt>
+                        <dd id="icon_edit_dd">
+                            {{ form.message }}
+                            <span class="helptext">{{ form.name.help_text }}</span>
+                            {{ form.message.errors }}
+                        </dd>
+                    </div>
+                    <div class="field">
+                        <dt id="icon_edit_dt">
+                            {{ form.twitter_url.label_tag }}
+                        </dt>
+                        <dd id="icon_edit_dd">
+                            {{ form.twitter_url }}
+                            <span class="helptext">{{ form.name.help_text }}</span>
+                            {{ form.twitter_url.errors }}
+                        </dd>
+                    </div>
+                    <div class="field">
+                        <button type="submit" class="btn btn-primary">更新</button>
+                    </div>
+                </form>
+            </div>
+        </dl>
     </div>
 </div>
 {% endblock %}
