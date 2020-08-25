@@ -8,13 +8,44 @@
         <div class="card-body">
             <form action="{% url 'accounts:signup' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {% for field in form %}
+
+                {{ form.non_field_errors }}
                 <div class="form-group">
-                    <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-                    {{ field }}
-                    {{ field.errors }}
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                    
+                    {{ form.username.errors }}
                 </div>
-                {% endfor %}
+
+                <div class="form-group">
+                    {{ form.password1.label_tag }}
+                    {{ form.password1 }}
+                    {{ form.password1.errors }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.password2.label_tag }}
+                    {{ form.password2 }}
+                    {{ form.password2.errors }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.icon.label_tag }}
+                    {{ form.icon }}
+                    {{ form.icon.errors }}
+                </div>
+                <div class="form-group">
+                    {{ form.massage.label_tag }}
+                    {{ form.message }}
+                    {{ form.message.errors }}
+                </div>
+                <div class="form-group">
+                    {{ form.twitter_url.label_tag }}
+                    {{ form.twitter_url }}
+                    {{ form.twitter_url.errors }}
+                </div>
+            
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">登録</button>
                 </div>

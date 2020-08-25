@@ -8,7 +8,7 @@ class SignUpForm(UserCreationForm):
         # 使うモデルの指定です。定義したものを使います。
         model = User
         # ここではフォームで入力するフィールドを指定しています。
-        fields = ("username", "password1", "password2", "icon", "message", "school")
+        fields = ("username", "password1", "password2", "icon", "message", "twitter_url")
     # 入力したパスワードの検証(バリデーション)を行っています
     def clean_password(self):
         # 入力されたパスワードを取得します
@@ -19,3 +19,5 @@ class SignUpForm(UserCreationForm):
         if not re.search(r'[a-zA-Z]', password):
             raise forms.ValidationError('アルファベットが含まれていません')
         return password
+
+    

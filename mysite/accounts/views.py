@@ -16,6 +16,7 @@ class SignUpView(generic.CreateView):
         form = self.get_form()
         # usernameから登録したユーザー情報を参照
         user = User.objects.get(username=form.data.get('username'))
+
         # ログイン処理を行う
         login(self.request, user)
         return reverse(

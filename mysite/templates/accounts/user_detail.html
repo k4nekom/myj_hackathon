@@ -10,7 +10,10 @@
                 {{user.username}}
             </h2>
             {{user.message}}
-            {{user.school}}
+            {% if user.id == login_user.id %}
+                {{user.twitter_url}}         
+            {% endif %}
+
 
         </div>
     </div>
