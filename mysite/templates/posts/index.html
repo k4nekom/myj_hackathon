@@ -19,8 +19,8 @@
                         <ul class="list-group list-group-flush">
                         </ul>
                         <div class="usernameicon">
-                            {% if user.icon %}
-                            <img src=" {{user.icon.url}}" class="iconcss">
+                            {% if post.author.icon %}
+                                <img src=" {{post.author.icon.url}}" class="iconcss">
                             {% endif %}
                             <span class="mr-2">
                                 <a class="nav-link"
@@ -40,16 +40,20 @@
                                         {{ post.created_at|date:'Y-m-d H:i' }}
                                     </small>
                                 </div>
-                                <div class="like_list_{{post.id}} box_left">
-                                    <!-- ここにお気に入り機能を実装していく -->
-                                    {{ post|is_like:user }}
-                                    {{ like_list|get_likes:post.id }}
-                                    <br>
-                                    <div class="card-footer">
+                            
+                                <br>
+                                <div class="card-footer">
+                             
+                                    <div class="like_list_{{post.id}} box_left">
+                                        <!-- ここにお気に入り機能を実装していく -->
+                                        {{ post|is_like:user }}
+                                        {{ like_list|get_likes:post.id }}
+                                        {{ comment_list|get_comment_list:post.id|linebreaksbr }}
+                                    </div>
+                     
+                                    {% if user.id != post.author.id %}
                                         <details>
-                                            <summary>コメント</summary>
-                                            {{ comment_list|get_comment_list:post.id|linebreaksbr }}
-                                            {% if user.id != post.author.id %}
+                                            <summary>コメントする</summary>
                                             <hr>
                                             <form class="comment" id="{{post.id}}">
                                                 {% csrf_token %}
@@ -57,10 +61,10 @@
                                                     rows="10"></textarea>
                                                 <input type="submit" value="送信" class="comment" name='comment'>
                                             </form>
-                                            {% endif %}
                                         </details>
-                                    </div>
+                                    {% endif %}
                                 </div>
+                                
                                 {% if login_user == post.author %}
                                 <a class="btn btn-danger" id="delete" href="{{post.id}}/delete">削除</a>
                                 {% endif %}
@@ -92,7 +96,7 @@
             do_like(id)
         }) // このセミコロンを削除
         // ここから新規追加
-        .on('click', 'form', function () {
+        .on('submit', 'form', function () {
             do_comment($(this))
             $(this).find("textarea").val("")
             return false
