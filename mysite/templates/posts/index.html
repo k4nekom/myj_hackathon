@@ -11,76 +11,77 @@
         {% for post in post_list %}
         <div class="row p-10 text-lefti">
             <div class="col-10 offset-1">
-                    {% if user.id == post.author.id %}
-                        <div class="card" style="background-color:#EEEEEE;">
+                {% if user.id == post.author.id %}
+                <div class="card" style="background-color:#EEEEEE;">
                     {% else %}
-                        <div class="card">
-                    {% endif %}
-                    <ul class="list-group list-group-flush">
-                    </ul>
-                    <div class="usernameicon">
-                        {% if user.icon %}
-                        <img src=" {{user.icon.url}}" class="iconcss">
+                    <div class="card">
                         {% endif %}
-                        {% if login_user == post.author %}
-                        <a class="btn btn-danger" href="{{post.id}}/delete">削除</a>
-                        {% endif %}
-                        <span class="mr-2">
-                            <a class="nav-link"
-                                href="/accounts/{{ post.author.username }}">　{{ post.author.username }}</a>
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-hedder">
-                            <div class="box_left bigsize">
-                                {{ post.text }}
-                            </div>
-                            {% if post.picture %}
-                            <img src="{{post.picture.url}}" class="card-img" />
+                        <ul class="list-group list-group-flush">
+                        </ul>
+                        <div class="usernameicon">
+                            {% if user.icon %}
+                            <img src=" {{user.icon.url}}" class="iconcss">
                             {% endif %}
-                            <div class="pt-2">
-                                <small>
-                                    {{ post.created_at|date:'Y-m-d H:i' }}
-                                </small>
-                            </div>
-                            <div class="like_list_{{post.id}} box_left">
-                                <!-- ここにお気に入り機能を実装していく -->
-                                {{ post|is_like:user }}
-                                {{ like_list|get_likes:post.id }}
-                                <br>
-                                <div class="card-footer">
-                                    <details>
-                                        <summary>コメント</summary>
-                                        {{ comment_list|get_comment_list:post.id|linebreaksbr }}
-                                        {% if user.id != post.author.id %}
+                            <span class="mr-2">
+                                <a class="nav-link"
+                                    href="/accounts/{{ post.author.username }}">　{{ post.author.username }}</a>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-hedder">
+                                <div class="box_left bigsize">
+                                    {{ post.text }}
+                                </div>
+                                {% if post.picture %}
+                                <img src="{{post.picture.url}}" class="card-img" />
+                                {% endif %}
+                                <div class="pt-2">
+                                    <small>
+                                        {{ post.created_at|date:'Y-m-d H:i' }}
+                                    </small>
+                                </div>
+                                <div class="like_list_{{post.id}} box_left">
+                                    <!-- ここにお気に入り機能を実装していく -->
+                                    {{ post|is_like:user }}
+                                    {{ like_list|get_likes:post.id }}
+                                    <br>
+                                    <div class="card-footer">
+                                        <details>
+                                            <summary>コメント</summary>
+                                            {{ comment_list|get_comment_list:post.id|linebreaksbr }}
+                                            {% if user.id != post.author.id %}
                                             <hr>
                                             <form class="comment" id="{{post.id}}">
                                                 {% csrf_token %}
-                                                <textarea class="form-control col-12" name="comment" cols="50" rows="10"></textarea>
+                                                <textarea class="form-control col-12" name="comment" cols="50"
+                                                    rows="10"></textarea>
                                                 <input type="submit" value="送信" class="comment" name='comment'>
                                             </form>
-                                        {% endif %}
-                                    </details>
+                                            {% endif %}
+                                        </details>
+                                    </div>
                                 </div>
+                                {% if login_user == post.author %}
+                                <a class="btn btn-danger" id="delete" href="{{post.id}}/delete">削除</a>
+                                {% endif %}
                             </div>
                         </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-        {% else %}
-        <div class="row p-5">
-            <div class="col-6 offset-3 text-center">
-                <div class="jumbotron jumbotron-fluid">
-                    <div class="container">
-                        <p class="lead"><a href="{% url 'posts:new' %}">投稿</a>して他のユーザーに見つけてもらおう</p>
+
                     </div>
                 </div>
             </div>
-            {% endif %}
-        </div>
+            {% endfor %}
+            {% else %}
+            <div class="row p-5">
+                <div class="col-6 offset-3 text-center">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <p class="lead"><a href="{% url 'posts:new' %}">投稿</a>して他のユーザーに見つけてもらおう</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
 </section>
 <!-- ここにJSスクリプトを書いていく -->
 
