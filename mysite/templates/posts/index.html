@@ -11,7 +11,11 @@
         {% for post in post_list %}
         <div class="row p-10 text-lefti">
             <div class="col-10 offset-1">
-                <div class="card">
+                    {% if user.id == post.author.id %}
+                        <div class="card" style="background-color:#EEEEEE;">
+                    {% else %}
+                        <div class="card">
+                    {% endif %}
                     <ul class="list-group list-group-flush">
                     </ul>
                     <div class="usernameicon">
@@ -41,22 +45,24 @@
                                 {{ post|is_like:user }}
                                 {{ like_list|get_likes:post.id }}
                                 <br>
-                                {{ comment_list|get_comment_list:post.id|linebreaksbr }}
+                                <div class="card-footer">
+                                    <details>
+                                        <summary>コメント</summary>
+                                        {{ comment_list|get_comment_list:post.id|linebreaksbr }}
+                                        {% if user.id != post.author.id %}
+                                            <hr>
+                                            <form class="comment" id="{{post.id}}">
+                                                {% csrf_token %}
+                                                <textarea class="form-control col-12" name="comment" cols="50" rows="10"></textarea>
+                                                <input type="submit" value="送信" class="comment" name='comment'>
+                                            </form>
+                                        {% endif %}
+                                    </details>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    {% if user.id != post.author.id %}
-                    <div class="card-footer">
-                        <details>
-                            <summary>コメントする</summary>
-                            <form class="comment" id="{{post.id}}">
-                                {% csrf_token %}
-                                <textarea class="form-control col-12" name="comment" cols="50" rows="10"></textarea>
-                                <input type="submit" value="送信" class="comment" name='comment'>
-                            </form>
-                        </details>
-                    </div>
-                    {% endif %}
+                    
                 </div>
             </div>
         </div>
