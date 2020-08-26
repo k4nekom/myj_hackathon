@@ -50,6 +50,12 @@ class Index(ListView):
         return context
 
 
+class PostDelete(DeleteView):
+    model = Post
+    success_url = reverse_lazy('posts:index')
+    template_name = 'posts/delete.html'
+
+
 class Likes(View):
     model = Like
 

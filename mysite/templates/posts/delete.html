@@ -1,0 +1,14 @@
+{% extends 'base/app.html' %}
+{% block contents %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <form method="post">
+        {% csrf_token %}
+        <p>削除します。よろしいですか？</p>
+        <input class="btn btn-danger" type="submit" value="削除する">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

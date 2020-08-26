@@ -19,7 +19,7 @@
                         <img src=" {{user.icon.url}}" class="iconcss">
                         {% endif %}
                         {% if login_user == post.author %}
-                        <a class="btn btn-danger" href="">削除</a>
+                        <a class="btn btn-danger" href="{{post.id}}/delete">削除</a>
                         {% endif %}
                         <span class="mr-2">
                             <a class="nav-link"
