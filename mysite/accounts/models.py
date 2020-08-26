@@ -4,7 +4,8 @@ from django.urls import reverse
 
 
 class User(AbstractUser):
-    icon = models.ImageField(upload_to="image/", blank=True, null=True)
+    icon = models.ImageField(
+        upload_to="image/", blank=True, null=True, default='default/e-go.jpg')
     message = models.TextField(blank=True, null=True)
     twitter_url = models.URLField(
         max_length=300, default='https://twitter.com/')

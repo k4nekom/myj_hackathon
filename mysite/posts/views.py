@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
-from django.views.generic import ListView
+from django.views.generic import ListView, DeleteView
 from django.urls import reverse_lazy
 from django.views import View
 
@@ -48,6 +48,12 @@ class Index(ListView):
         context['login_user'] = login_user
         context['comment_list'] = comment_list2
         return context
+
+
+class PostDelete(DeleteView):
+    model = Post
+    success_url = reverse_lazy('posts:index')
+    template_name = 'posts/delete.html'
 
 
 class Likes(View):
