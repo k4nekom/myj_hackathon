@@ -27,3 +27,7 @@ img.card-img {
     float: left;
     width: 50;
 }
+
+#delete {
+    width: 100px;
+}

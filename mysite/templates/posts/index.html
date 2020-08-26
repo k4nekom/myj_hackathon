@@ -18,9 +18,6 @@
                         {% if user.icon %}
                         <img src=" {{user.icon.url}}" class="iconcss">
                         {% endif %}
-                        {% if login_user == post.author %}
-                        <a class="btn btn-danger" href="{{post.id}}/delete">削除</a>
-                        {% endif %}
                         <span class="mr-2">
                             <a class="nav-link"
                                 href="/accounts/{{ post.author.username }}">　{{ post.author.username }}</a>
@@ -48,6 +45,9 @@
                             </div>
                         </div>
                     </div>
+                    {% if login_user == post.author %}
+                    <a class="btn btn-danger" id="delete" href="{{post.id}}/delete">削除</a>
+                    {% endif %}
                     {% if user.id != post.author.id %}
                     <div class="card-footer">
                         <details>
