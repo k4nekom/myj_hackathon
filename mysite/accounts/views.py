@@ -3,16 +3,22 @@ from django.views import generic
 from django.urls import reverse
 from django.views.generic.detail import DetailView
 from django.contrib.auth import login
+from django.views.generic.edit import UpdateView
+
 from .forms import SignUpForm
 from .models import User
-from django.views.generic.edit import UpdateView
+from posts.models import Post
+from posts.views import Index
 # サインアップ画面
+
+
 class SignUpView(generic.CreateView):
     # 使うformクラス設定
     form_class = SignUpForm
     # 使うテンプレートファイル設定
     template_name = 'registration/signup.html'
     # 成功時にログイン処理を行ってAccountDetailViewに飛ぶ
+
     def get_success_url(self):
         form = self.get_form()
         # usernameから登録したユーザー情報を参照
@@ -22,25 +28,33 @@ class SignUpView(generic.CreateView):
         login(self.request, user)
         return reverse(
             'accounts:userdetail',
-            kwargs={'username': user.username })
+            kwargs={'username': user.username})
 # アカウント詳細画面設定
+
+
 class AccountDetailView(DetailView):
     model = User
     # urlのパスクエリを引数に取る(後述)
     slug_field = 'username'
     slug_url_kwarg = 'username'
-    def get_context_data(self,**kwargs):
+    queryset = User.objects.order_by('id')
+
+    def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['login_user'] = self.request.user
+        context['post_list'] = Post.objects.all()
         return context
+
 
 class IconEdit(UpdateView):
     model = User
     template_name = 'accounts/icon_edit.html'
-    fields = ['icon','message','twitter_url']
+    fields = ['icon', 'message', 'twitter_url']
+
     def get_object(self):
         # ログイン中のユーザーで検索することを明示する
         return self.request.user
+
     def get_success_url(self):
         form = self.get_form()
         return reverse(

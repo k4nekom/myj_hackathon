@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-9">
             {% if user.icon %}
-                <img src=" {{user.icon.url}}" class="user_icon_img">
+            <img src=" {{user.icon.url}}" class="user_icon_img">
             {% endif %}
             <h2 class="detail_user_name">
                 {{user.username}}
@@ -17,17 +17,35 @@
 
             <p>{{user.message}}</p><br>
             {% if user.id == login_user.id %}
-                <h4 class="detail_user_profile">twitter</h4>
-                {{user.twitter_url}} <br>   
+            <h4 class="detail_user_profile">twitter</h4>
+            {{user.twitter_url}} <br>
 
-                <br>     
-                <a href="{% url 'accounts:icon_edit' %}">
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-cog"></i> プロフィールを編集する
-                    </button>
-                </a>
+            <br>
+            <a href="{% url 'accounts:icon_edit' %}">
+                <button class="btn btn-secondary">
+                    <i class="fas fa-cog"></i> プロフィールを編集する
+                </button>
+            </a>
             {% endif %}
         </div>
+        {% if post_list %}
+        {% for post in post_list %}
+        {% if post.author.id == user.id %}
+        <div class="box_left bigsize">
+            <h1>{{ post.text }}</h1>
+        </div>
+        {% if post.picture %}
+        <img src="{{post.picture.url}}" class="card-img" />
+        {% endif %}
+        <div class="pt-2">
+            <p>{{ post.created_at|date:'Y-m-d H:i' }}</p>
+        </div>
+
+        {% endif %}
+        {% endfor %}
+        {% else %}
+
+        {% endif %}
     </div>
 
 </div>
