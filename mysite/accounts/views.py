@@ -7,7 +7,7 @@ from django.views.generic.edit import UpdateView
 
 from .forms import SignUpForm
 from .models import User
-from posts.models import Post
+from posts.models import Post, Comment
 from posts.views import Index
 # サインアップ画面
 
@@ -43,6 +43,19 @@ class AccountDetailView(DetailView):
         context = super().get_context_data()
         context['login_user'] = self.request.user
         context['post_list'] = Post.objects.all()
+        login_user = self.request.user
+        comment_list = {}
+        comment_list2 = {}
+
+        for post in context['post_list']:
+            comment_list[post.id] = Comment.objects.filter(post=post)
+        for post in context['post_list']:
+            comments = []
+            for comment in comment_list[post.id]:
+                if post.author.id == login_user.id or comment.author.id == login_user.id:
+                    comments.append(comment)
+            comment_list2.update({post.id: comments})
+        context['comment_list'] = comment_list2
         return context
 
 
