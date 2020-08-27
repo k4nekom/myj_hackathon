@@ -18,7 +18,7 @@
 
             <h4 class="detail_user_profile">profile</h4>
 
-            <p>{{user.message}}</p><br>
+            <p>{{user.message|linebreaksbr }}</p><br>
             {% if user.id == login_user.id %}
             <h4 class="detail_user_profile">twitter</h4>
             {{user.twitter_url}} <br>
