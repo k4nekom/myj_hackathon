@@ -41,7 +41,7 @@ class Index(ListView):
         for post in context['post_list']:
             comments = []
             for comment in comment_list[post.id]:
-                if post.id == login_user.id or comment.author.id == login_user.id:
+                if post.author.id == login_user.id or comment.author.id == login_user.id:
                     comments.append(comment)
             comment_list2.update({post.id: comments})
         context['like_list'] = like_list
