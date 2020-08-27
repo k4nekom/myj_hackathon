@@ -15,6 +15,17 @@
             {% endif %}
         </div>
         <div class="form-group">
+            <label for="title">タイトル</label>
+            <div>
+                {{form.title}}
+            </div>
+            {% if form.title.errors %}
+            <div class="alert alert-danger">
+                {{ form.title.errors }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
             <label for="text">メッセージ</label>
             <textarea class="form-control" name="text" cols="40" rows="10" id="id_text"></textarea>
             {% if form.text.errors %}

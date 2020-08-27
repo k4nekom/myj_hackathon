@@ -1,6 +1,9 @@
 {% extends "base/app.html" %}
+
+{% load custom_filter %}
+
 {% block contents %}
-<div class="container">
+<div class="container" id="user_detail">
     <!-- アカウント情報 -->
     <div class="row">
         <div class="col-md-2 col-md-offset-4">
@@ -27,26 +30,32 @@
                 </button>
             </a>
             {% endif %}
-        </div>
-        {% if post_list %}
-        {% for post in post_list %}
-        {% if post.author.id == user.id %}
-        <div class="box_left bigsize">
-            <h1>{{ post.text }}</h1>
-        </div>
-        {% if post.picture %}
-        <img src="{{post.picture.url}}" class="card-img" />
-        {% endif %}
-        <div class="pt-2">
-            <p>{{ post.created_at|date:'Y-m-d H:i' }}</p>
-        </div>
+            <hr>
+            <h4 class="detail_user_profile">{{user.username}}の投稿一覧</h4>
+            <hr>
+            <di class="card">
+                {% if post_list %}
+                {% for post in post_list %}
+                {% if post.author.id == user.id %}
+                <div class="box_left bigsize">
+                    <h3>{{ post.text }}</h3>
+                </div>
+                {% if post.picture %}
+                <img src="{{post.picture.url}}" class="card-img" />
+                {% endif %}
+                <div class="pt-2">
+                    <p>{{ post.created_at|date:'Y-m-d H:i' }}</p>
+                    {{ comment_list|get_comment_list:post.id|linebreaksbr }}
+                </div>
+                <hr>
 
-        {% endif %}
-        {% endfor %}
-        {% else %}
-
-        {% endif %}
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                {% endif %}
+        </div>
     </div>
+</div>
 
 </div>
 {% endblock contents %}
